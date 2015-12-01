@@ -1,0 +1,10 @@
+.edit_user, .edit_gdc{
+    margin-top:-2px;
+    cursor:pointer;
+}
+.grey{
+    color:grey;
+}
+.black{
+    color:black;
+}

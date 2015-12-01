@@ -1,0 +1,195 @@
+
+<table class="table table-striped">
+    <tr>
+        <th ng-click="order('username')">
+            <span>username</span> 
+            <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'username'}" class="glyphicon glyphicon-triangle-top"></span>
+            <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'username'}" class="glyphicon glyphicon-triangle-bottom"></span>
+            <br/>
+            <input class="col-xs-5" type="text" ng-model="search.username"/>
+        </th>
+        <th ng-click="order('hdv')">
+            <span>hdv</span> 
+            <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'hdv'}" class="glyphicon glyphicon-triangle-top"></span>
+            <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'hdv'}" class="glyphicon glyphicon-triangle-bottom"></span>
+            <br/>
+            <input class="col-xs-5" type="text" ng-model="search.hdv"/>
+        </th>
+        <th ng-click="order('firstname')">
+            <span>firstname</span> 
+            <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'firstname'}" class="glyphicon glyphicon-triangle-top"></span>
+            <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'firstname'}" class="glyphicon glyphicon-triangle-bottom"></span>
+            <br/>
+            <input class="col-xs-5" type="text" ng-model="search.firstname"/>
+        </th>
+        <th ng-click="order('age')">
+
+            <span>age</span> 
+            <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'age'}" class="glyphicon glyphicon-triangle-top"></span>
+            <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'age'}" class="glyphicon glyphicon-triangle-bottom"></span>
+            <br/>
+            <input class="col-xs-5" type="text" ng-model="search.age"/>
+        </th>
+        <th ng-click="order('city')">
+
+            <span>city</span> 
+            <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'city'}" class="glyphicon glyphicon-triangle-top"></span>
+            <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'city'}" class="glyphicon glyphicon-triangle-bottom"></span>
+            <br/>
+            <input class="col-xs-5" type="text" ng-model="search.city"/>
+        </th>
+        <th ng-click="order('link')">
+
+            <span>link</span> 
+            <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'link'}" class="glyphicon glyphicon-triangle-top"></span>
+            <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'link'}" class="glyphicon glyphicon-triangle-bottom"></span>
+            <br/>
+            <input class="col-xs-5" type="text" ng-model="search.link"/>
+        </th>
+        <th ng-click="order('description')">
+
+            <span>description</span> 
+            <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'description'}" class="glyphicon glyphicon-triangle-top"></span>
+            <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'description'}" class="glyphicon glyphicon-triangle-bottom"></span>
+            <br/>
+            <input class="col-xs-5" type="text" ng-model="search.description"/>
+        </th>
+        <th ng-click="order('leave_reason')" ng-if="currentState=='users-out'">
+
+            <span>leave reason</span> 
+            <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'leave_reason'}" class="glyphicon glyphicon-triangle-top"></span>
+            <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'leave_reason'}" class="glyphicon glyphicon-triangle-bottom"></span>
+            <br/>
+            <input class="col-xs-5" type="text" ng-model="search.leave_reason"/>
+        </th>
+        <th ng-click="order('date_arrived')">
+
+            <span>date arrived</span> 
+            <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'date_arrived'}" class="glyphicon glyphicon-triangle-top"></span>
+            <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'date_arrived'}" class="glyphicon glyphicon-triangle-bottom"></span>
+        </th>
+        <th ng-click="order('leave_date')" ng-if="currentState=='users-out'">
+
+            <span>leave date</span> 
+            <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'leave_date'}" class="glyphicon glyphicon-triangle-top"></span>
+            <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'leave_date'}" class="glyphicon glyphicon-triangle-bottom"></span>
+            <br/>
+            <input class="col-xs-5" type="text" ng-model="search.leave_date"/>
+        </th>
+        <th></th>
+    </tr>
+    <tr ng-repeat="(key,user) in listUsers.users | orderBy:predicate:reverse |filter:search">
+        <td>
+            {{user.username}}
+        </td>
+        <td>
+            {{user.hdv}}
+        </td>
+        <td>
+            {{user.firstname}}
+        </td>
+        <td>
+            {{user.age}}
+        </td>
+        <td>
+            {{user.city}}
+        </td>
+        <td>
+            {{user.link}}
+        </td>
+        <td>
+            {{user.description}}
+        </td>
+        <td  ng-if="!user.state">
+            {{user.leaveReason}}
+        </td>
+        <td>
+            {{convertDate(user.dateArrived.date)}}
+        </td>
+        <td ng-if="!user.state">
+            {{convertDate(user.leaveDate.date)}}
+        </td>
+        <td class="glyphicon glyphicon-edit edit_user" data-toggle="modal" data-target="#myModal" ng-click="filled_user(user.id)"></td>
+    </tr>
+</table>
+<img ng-if="! listUsers.users" src="../img/loading.gif" alt=""/><br/>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="clear_user_form()">Add user</button>
+<!--<script type="text/javascript">
+        var self = this;
+    var data = {{listUsers.users}};
+    self.tableParams = new NgTableParams({}, { dataset: data});
+
+    </script>-->
+<!--<pre>user = {{edit_user | json}}</pre>-->
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Edit user</h4>
+            </div>
+            <div class="modal-body">
+                <div ng-controller="usersCtrl">
+                    <form novalidate class="form-horizontal">
+                        <fieldset><legend>Infos</legend>
+                            <div class="form-group">
+                                <label for="username" class="col-xs-3">Username :</label> 
+                                <input name="username" ng-model="edit_user.username" class="col-xs-4" type="text" />
+                            </div>
+                            <div class="form-group">
+                                <label for="hdv" class="col-xs-3">HDV :</label>
+                                <select name="hdv" class="col-xs-4" ng-model="edit_user.hdv">
+                                    <option ng-repeat="hdv in hdvs" value="{{hdv}}" ng-selected="{{edit_user.hdv}}">{{hdv}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="firstname" class="col-xs-3">Firstname :</label>
+                                <input name="firstname" ng-model="edit_user.firstname" class="col-xs-4" type="text" />
+                            </div>
+                            <div class="form-group">
+                                <label for="age" class="col-xs-3">Age :</label>
+                                <input name="age" ng-model="edit_user.age" class="col-xs-4" type="text" /><br />
+                            </div>
+                            <div class="form-group">
+                                <label for="city" class="col-xs-3">City :</label>
+                                <input name="city" ng-model="edit_user.city" class="col-xs-4" type="text" /><br />
+                            </div>
+                        </fieldset>
+                        <fieldset><legend>Infos supplémentaires</legend>
+                            <div class="form-group">
+                                <label for="link" class="col-xs-3">Relationship :</label>
+                                <input name="link" ng-model="edit_user.link" class="col-xs-4" type="text" />
+                            </div>
+                            <div class="form-group">
+                                <label for="description" class="col-xs-3">Description :</label>
+                                <textarea name="description" ng-model="edit_user.description" class="col-xs-4" type="text" rows="2" cols="50"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="state" class="col-xs-3">State :</label>
+                                <select name="state" class="col-xs-4" ng-model="edit_user.state">
+                                    <option value="1" ng-selected="{{edit_user.state}}">IN</option>
+                                    <option value="0" ng-selected="{{!edit_user.state}}">OUT</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="leaveReason" class="col-xs-3">Leave reason :</label>
+                                <input name="leaveReason" ng-model="edit_user.leaveReason" class="col-xs-4" type="text" />
+                            </div>
+                            <div class="form-group">
+                                <label for="dateArrived" class="col-xs-3">Date arrived :</label>
+                                <input name="dateArrived" ng-model="edit_user.dateArrived.date" class="col-xs-4" type="text"/>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                <input type="submit" class="btn btn-primary" ng-click="edit(edit_user)" value="Save" />
+            </div>
+        </div>
+    </div>
+</div>

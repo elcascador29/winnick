@@ -1,0 +1,30 @@
+app_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: AppBundle:Default:index }
+app_users_in:
+    path:     /users/getAll/In
+    defaults: { _controller: AppBundle:Default:users, in: true }
+app_users_out:
+    path:     /users/getAll/Out
+    defaults: { _controller: AppBundle:Default:users, in: false }
+app_save_user:
+    path:     /users/saveUser
+    defaults: { _controller: AppBundle:Default:saveUser }
+app_add_user:
+    path:     /users/addUser
+    defaults: { _controller: AppBundle:Default:addUser }
+app_gdc:
+    path:     /gdc/getAll
+    defaults: { _controller: AppBundle:Gdc:index }
+app_save_gdc:
+    path:     /gdc/save
+    defaults: { _controller: AppBundle:Gdc:save }
+app_gdc_war:
+    path:     /gdc/war/{id}
+    defaults: { _controller: AppBundle:Gdc:war }
+app_gdc_war_info:
+    path:     /gdc/warInfo/{id}
+    defaults: { _controller: AppBundle:Gdc:warInfo }
+app_gdc_save_war:
+    path:     /gdc/saveWar
+    defaults: { _controller: AppBundle:Gdc:saveWar }

@@ -1,0 +1,93 @@
+<table class="table table-striped">
+    <tr>
+        <th ng-click="order('id')">
+            <span>id</span> 
+            <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'id'}" class="glyphicon glyphicon-triangle-top"></span>
+            <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'id'}" class="glyphicon glyphicon-triangle-bottom"></span>
+        </th>
+        <th ng-click="order('enemy')">
+            <span>enemy</span> 
+            <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'enemy'}" class="glyphicon glyphicon-triangle-top"></span>
+            <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'enemy'}" class="glyphicon glyphicon-triangle-bottom"></span>
+        </th>
+        <th ng-click="order('stars')">
+            <span>stars</span> 
+            <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'stars'}" class="glyphicon glyphicon-triangle-top"></span>
+            <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'stars'}" class="glyphicon glyphicon-triangle-bottom"></span>
+        </th>
+        <th ng-click="order('enemy_stars')">
+            <span>enemy stars</span> 
+            <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'enemy_stars'}" class="glyphicon glyphicon-triangle-top"></span>
+            <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'enemy_stars'}" class="glyphicon glyphicon-triangle-bottom"></span>
+        </th>
+        <th ng-click="order('date')">
+            <span>date</span> 
+            <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'date'}" class="glyphicon glyphicon-triangle-top"></span>
+            <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'date'}" class="glyphicon glyphicon-triangle-bottom"></span>
+        </th>
+        <th></th>
+    </tr>
+    <tr ng-repeat="(key,gdc) in Gdcs.listGdc | orderBy:predicate:reverse">
+        <td>
+            <a ui-sref="war({id:gdc.id})">
+                {{gdc.id}}
+            </a>
+        </td>
+        <td>
+            {{gdc.enemy_team}}
+        </td>
+        <td ng-class="{'text-success': gdc.stars > gdc.enemy_stars, 'text-danger': gdc.stars < gdc.enemy_stars}">
+            <b>{{gdc.stars}}</b>
+        </td>
+        <td  ng-class="{'text-success': gdc.stars < gdc.enemy_stars, 'text-danger': gdc.stars > gdc.enemy_stars}">
+            <b>{{gdc.enemy_stars}}</b>
+        </td>
+        <td>
+            {{convertDate(gdc.date.date)}}
+        </td>
+        <td class="glyphicon glyphicon-edit edit_gdc" data-toggle="modal" data-target="#myModal" ng-click="filled_gdc(gdc.id)"></td>
+    </tr>
+</table>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="clear_gdc_form()">Add GDC</button>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Edit GDC</h4>
+            </div>
+            <div class="modal-body">
+                <div ng-controller="gdcCtrl">
+                    <form novalidate class="form-horizontal">
+                        <fieldset><legend>Infos</legend>
+                            <div class="form-group">
+                                <label for="enemy_team" class="col-xs-3">Enemy :</label> 
+                                <input name="enemy_team" ng-model="edit_gdc.enemy_team" class="col-xs-4" type="text" />
+                            </div>
+                            <div class="form-group">
+                                <label for="stars" class="col-xs-3">Stars :</label>
+                                <input name="stars" ng-model="edit_gdc.stars" class="col-xs-4" type="text" />
+                            </div>
+                            <div class="form-group">
+                                <label for="enemy_stars" class="col-xs-3">Enemy stars :</label>
+                                <input name="enemy_stars" ng-model="edit_gdc.enemy_stars" class="col-xs-4" type="text" />
+                            </div>
+                            <div class="form-group">
+                                <label for="date" class="col-xs-3">Date :</label>
+                                <input name="date" ng-model="edit_gdc.date.date" class="col-xs-4" type="text" /><br />
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                <input type="submit" class="btn btn-primary" ng-click="edit(edit_gdc)" value="Save" />
+            </div>
+        </div>
+    </div>
+</div>

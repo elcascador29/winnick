@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!--<script src="js/angular.min.js"></script>-->
+        <script src="js/angular.min.js"></script>
+        <script src="js/angular-resource.js"></script>
+        <!--<script src="js/angular-route.min.js"></script>-->
+        <script src="js/angular-ui-router.min.js"></script>
+        <script src="js/jquery-1.11.3.min.js"></script>
+        <script src="css/bootstrap/js/bootstrap.min.js"></script>
+        <!--<script src="js/ng-table.js"></script>-->
+        <script src="js/script.js"></script>
+        <!--<script src="controllers/homeCtrl.js"></script>-->
+        <!--<script src="js/searchMovie.js"></script>-->
+        <script src="controllers/usersCtrl.js"></script>        
+        <script src="controllers/indexCtrl.js"></script>        
+        <script src="controllers/gdcCtrl.js"></script>        
+        <script src="services/userService.js"></script>        
+        <script src="services/gdcService.js"></script>        
+        
+        <!--<link href="bootstrap/css/bootstrap.css" media="screen" rel="stylesheet" type="text/css">-->
+        <link href="css/bootstrap/css/bootstrap-theme.css" media="screen" rel="stylesheet" type="text/css">
+        <link href="css/ngTable/ng-table.min.css" media="screen" rel="stylesheet" type="text/css">
+        <link href="css/style.css" media="screen" rel="stylesheet" type="text/css">
+        <link href="css/cerulean.css" media="screen" rel="stylesheet" type="text/css">
+
+    </head>
+    <body ng-app="MonApp">
+        
+        <div ng-include="'templates/nav.html'"></div>
+        
+        <div ui-view class="page-header"></div>
+        
+    </body>
+</html>
