@@ -8,3 +8,4 @@
 .black{
     color:black;
 }
+.input-group-addon { width: 11px !important;cursor:pointer }

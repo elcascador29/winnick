@@ -1,40 +1,54 @@
 <h2>War against {{war_info.infos.enemyTeam}}</h2>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="clear_war_form()">Add user</button>
 <table class="table table-striped">
     <tr>
-        <th ng-click="order('username')">
+        <th ng-click="order('username')" class="col-xs-2">
+            <input class="col-xs-12" type="text" ng-model="search.username"/><br/>
             <span>user</span> 
             <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'username'}" class="glyphicon glyphicon-triangle-top"></span>
             <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'username'}" class="glyphicon glyphicon-triangle-bottom"></span>
-            <br/>
-            <input class="col-xs-5" type="text" ng-model="search.username"/>
         </th>
-        <th ng-click="order('first_attack')">
-            <span>first attack</span> 
+        <th ng-click="order('first_attack')" class="col-xs-1">
+            <input class="col-xs-12" type="text" ng-model="search.first_attack"/>
+            <span>1st attack</span> 
             <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'first_attack'}" class="glyphicon glyphicon-triangle-top"></span>
             <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'first_attack'}" class="glyphicon glyphicon-triangle-bottom"></span>
-            <br/>
-            <input class="col-xs-5" type="text" ng-model="search.first_attack"/>
         </th>
-        <th ng-click="order('second_attack')">
-            <span>second attack</span> 
-            <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'second_attack'}" class="glyphicon glyphicon-triangle-top"></span>
-            <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'second_attack'}" class="glyphicon glyphicon-triangle-bottom"></span>
-            <br/>
-            <input class="col-xs-5" type="text" ng-model="search.second_attack"/>
+        <th ng-click="order('enemy_position')" class="col-xs-2">
+            <input class="col-xs-12" type="text" ng-model="search.enemy_position"/>
+            <span>n° enemy</span> 
+            <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'enemy_position'}" class="glyphicon glyphicon-triangle-top"></span>
+            <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'enemy_position'}" class="glyphicon glyphicon-triangle-bottom"></span>     
         </th>
-        <th ng-click="order('strategy')">
+        <th ng-click="order('strategy')" class="col-xs-2">
+            <input class="col-xs-12" type="text" ng-model="search.strategy"/>
             <span>strategy</span> 
             <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'strategy'}" class="glyphicon glyphicon-triangle-top"></span>
             <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'strategy'}" class="glyphicon glyphicon-triangle-bottom"></span>
-            <br/>
-            <input class="col-xs-5" type="text" ng-model="search.strategy"/>
         </th>
-        <th ng-click="order('cdc_full')">
+        <th ng-click="order('second_attack')" class="col-xs-1">
+            <input class="col-xs-12" type="text" ng-model="search.second_attack"/>
+            <span>2nd attack</span> 
+            <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'second_attack'}" class="glyphicon glyphicon-triangle-top"></span>
+            <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'second_attack'}" class="glyphicon glyphicon-triangle-bottom"></span>
+        </th>
+        <th ng-click="order('enemy_position2')" class="col-xs-1">
+            <input class="col-xs-12" type="text" ng-model="search.enemy_position2"/>
+            <span>n° enemy</span> 
+            <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'enemy_position2'}" class="glyphicon glyphicon-triangle-top"></span>
+            <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'enemy_position2'}" class="glyphicon glyphicon-triangle-bottom"></span>
+        </th>
+        <th ng-click="order('strategy2')" class="col-xs-2">
+            <input class="col-xs-12" type="text" ng-model="search.strategy2"/>
+            <span>strategy</span> 
+            <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'strategy2'}" class="glyphicon glyphicon-triangle-top"></span>
+            <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'strategy2'}" class="glyphicon glyphicon-triangle-bottom"></span>
+        </th>
+        <th ng-click="order('cdc_full')" class="col-xs-1">
+            <input class="col-xs-12" type="text" ng-model="search.cdc_full"/>
             <span>cdc full</span> 
             <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'cdc_full'}" class="glyphicon glyphicon-triangle-top"></span>
             <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'cdc_full'}" class="glyphicon glyphicon-triangle-bottom"></span>
-            <br/>
-            <input class="col-xs-5" type="text" ng-model="search.cdc_full"/>
         </th>
         
         <th></th>
@@ -49,10 +63,19 @@
             {{user.first_attack}}
         </td>
         <td>
-            {{user.second_attack}}
+            {{user.enemy_position}}
         </td>
         <td>
             {{user.strategy}}
+        </td>
+        <td>
+            {{user.second_attack}}
+        </td>
+        <td>
+            {{user.enemy_position2}}
+        </td>
+        <td>
+            {{user.strategy2}}
         </td>
         <td>
             {{user.cdc_full}}
@@ -61,7 +84,6 @@
         <td class="glyphicon glyphicon-edit edit_gdc" data-toggle="modal" data-target="#myModal" ng-click="filled_war(user.id_user)"></td>
     </tr>
 </table>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="clear_war_form()">Add user</button>
 
 
 <!-- Modal -->
@@ -75,41 +97,66 @@
             <div class="modal-body">
                 <div ng-controller="gdcCtrl">
                     <form novalidate class="form-horizontal">
-                        <fieldset><legend>Infos</legend>
-                            <div class="form-group">
-                                <label for="username" class="col-xs-3">user :</label> 
-                                <select name="username" class="col-xs-4" ng-model="edit_war_user.id_user">
-                                    <option ng-repeat="user2 in Users.users" value="{{user2.id}}" ng-selected="{{edit_war_user.id_user}}">{{user2.username}}</option>
-                                </select>
+                        
+                        <div class="form-group">
+                            <label for="username" class="col-xs-3">user :</label> 
+                            <select name="username" class="col-xs-4" ng-model="edit_war_user.id_user">
+                                <option ng-repeat="user2 in Users.users" value="{{user2.id}}" ng-selected="{{edit_war_user.id_user}}">{{user2.username}}</option>
+                            </select>
 
-                            </div>
-                            <div class="form-group">
-                                <label for="first_attack" class="col-xs-3">first attack :</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="cdc_full" class="col-xs-3">full cdc :</label>
+                            <select name="cdc_full" class="col-xs-4" ng-model="edit_war_user.cdc_full">
+                                <option value="true" ng-selected="{{edit_war_user.cdc_full}}">full</option>
+                                <option value="false" ng-selected="{{edit_war_user.cdc_full}}">empty</option>
+                            </select>
+                        </div>
+                        <fieldset>
+                            <legend>First attack</legend>
+                            <div class="form-group col-xs-6">
+                                <label for="first_attack" class="col-xs-7">first attack :</label>
                                 <input name="first_attack" ng-model="edit_war_user.first_attack" class="col-xs-4" type="text" />
                             </div>
-                            <div class="form-group">
-                                <label for="second_attack" class="col-xs-3">second attack :</label>
-                                <input name="second_attack" ng-model="edit_war_user.second_attack" class="col-xs-4" type="text" />
+                            <div class="form-group col-xs-6">
+                                <label for="enemy_position" class="col-xs-7">enemyposition :</label>
+                                <input name="enemy_position" ng-model="edit_war_user.enemy_position" class="col-xs-4" type="text" />
                             </div>
-                            <div class="form-group">
+                            <div class="form-group col-xs-12">
                                 <label for="strategy" class="col-xs-3">strategy :</label>
-                                <select name="username" class="col-xs-4" ng-model="edit_war_user.strategy">
+                                <select name="strategy" class="col-xs-3" ng-model="edit_war_user.strategy">
                                     <option value="gowipe" ng-selected="{{edit_war_user.strategy}}">gowipe</option>
                                     <option value="cochons" ng-selected="{{edit_war_user.strategy}}">cochons</option>
                                     <option value="dragons" ng-selected="{{edit_war_user.strategy}}">dragons</option>
                                     <option value="gowiwi" ng-selected="{{edit_war_user.strategy}}">gowiwi</option>
                                     <option value="freestyle" ng-selected="{{edit_war_user.strategy}}">freestyle</option>
                                 </select>
-                                <!--<input name="strategy" ng-model="edit_war_user.strategy" class="col-xs-4" type="text" /><br />-->
-                            </div>
-                            <div class="form-group">
-                                <label for="cdc_full" class="col-xs-3">full cdc :</label>
-                                <select name="cdc_full" class="col-xs-4" ng-model="edit_war_user.cdc_full">
-                                    <option value="true" ng-selected="{{edit_war_user.cdc_full}}">full</option>
-                                    <option value="false" ng-selected="{{edit_war_user.cdc_full}}">empty</option>
-                                </select>
                             </div>
                         </fieldset>
+                        <fieldset>
+                            <legend>Second attack</legend>
+                            <div class="form-group col-xs-6">
+                                <label for="second_attack" class=" col-xs-7">second attack :</label>
+                                <input name="second_attack" ng-model="edit_war_user.second_attack" class="col-xs-4" type="text" />
+                            </div>
+                            <div class="form-group col-xs-6">
+                                <label for="enemy_position2" class=" col-xs-7">enemy position :</label>
+                                <input name="enemy_position2" ng-model="edit_war_user.enemy_position2" class="col-xs-4" type="text" />
+                            </div>
+                            <div class="form-group col-xs-12">
+                                <label for="strategy2" class="col-xs-3">strategy :</label>
+                                <select name="strategy2" class="col-xs-3" ng-model="edit_war_user.strategy2">
+                                    <option value="gowipe" ng-selected="{{edit_war_user.strategy2}}">gowipe</option>
+                                    <option value="cochons" ng-selected="{{edit_war_user.strategy2}}">cochons</option>
+                                    <option value="dragons" ng-selected="{{edit_war_user.strategy2}}">dragons</option>
+                                    <option value="gowiwi" ng-selected="{{edit_war_user.strategy2}}">gowiwi</option>
+                                    <option value="freestyle" ng-selected="{{edit_war_user.strategy2}}">freestyle</option>
+                                </select>
+                                <!--<input name="strategy" ng-model="edit_war_user.strategy" class="col-xs-4" type="text" /><br />-->
+                            </div>
+                        </fieldset>
+                        
+                        
                     </form>
                 </div>
             </div>

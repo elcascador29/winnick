@@ -45,16 +45,12 @@ app
 
                 $scope.edit = function(user) {
                     var ret = UserService.saveUser(user);
-//console.log(user);
-//console.log(ret);
+
                     // Ajout à la liste si nouvel utilisateur
-                    if (user.id === null && user.state == 1) {
-//                        console.log('addUser');
-//                        user.id=ret.id_user;
-//                        console.log(user);
+                    if (user.id === null && user.state === true) {
                         $scope.listUsers.users.push(user);
                     }
-//                    console.log(ret);
+                    console.log(ret);
 
                     $('#myModal').modal('hide');
                 }

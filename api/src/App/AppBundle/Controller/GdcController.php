@@ -164,4 +164,102 @@ class GdcController extends Controller
         exit;
     }
 
+    /**
+     * Retourne les stats globales des GDC
+     */
+    public function statsAction(Request $request)
+    {
+        $allGDC = $this->getDoctrine()
+                ->getRepository('AppBundle:Gdc')
+                ->findAll();
+
+        $nbGdcWin = 0;
+        $nbConsecutiveWin = 0;
+        $nbConsecutiveWinTmp = 0;
+        foreach ($allGDC as $gdc) {
+            if ($gdc->getStars() > $gdc->getEnemyStars()) {
+                $nbGdcWin++;
+                $nbConsecutiveWinTmp ++;
+            } else {
+                if ($nbConsecutiveWinTmp > $nbConsecutiveWin) {
+                    $nbConsecutiveWin = $nbConsecutiveWinTmp;
+                }
+                $nbConsecutiveWinTmp = 0;
+            }
+        }
+
+        // dernière boucle
+        if ($nbConsecutiveWinTmp > $nbConsecutiveWin) {
+            $nbConsecutiveWin = $nbConsecutiveWinTmp;
+        }
+
+        echo json_encode(
+                array(
+                    'nb_gdc' => count($allGDC),
+                    'nb_gdc_win' => $nbGdcWin,
+                    'nb_gdc_loose' => count($allGDC) - $nbGdcWin,
+                    'nb_gdc_win_consecutive' => $nbConsecutiveWin,
+                )
+        );
+        exit;
+    }
+
+    /**
+     * Récupère les stats en GDC des utilisateurs IN
+     */
+    public function statsUsersAction()
+    {
+        $allUsers = $this->getDoctrine()
+                ->getRepository('AppBundle:Users')
+                ->getUsersIn();
+
+        $allUsersStats = $this->getDoctrine()
+                ->getRepository('AppBundle:WarAttack')
+                ->getStatsUsers();
+
+        $id_user = null;
+        $username = null;
+        $firstAttackAverage = 0;
+        $secondAttackAverage = 0;
+        $nbGdc = 0;
+        $nbTotalStars = 0;
+
+        $aStatsUsers = array();
+        foreach ($allUsersStats as $entity) {
+
+            if ($id_user != $entity->getIdUser()->getId()) {
+
+                if ($id_user !== null) {
+                    $aStatsUsers[$id_user] = array(
+                        'username' => $username,
+                        'nbGdc' => $nbGdc,
+                        'nbTotalStars' => $nbTotalStars,
+                        'firstAttackAverage' => round(($firstAttackAverage / $nbGdc), 2),
+                        'secondAttackAverage' => round(($secondAttackAverage / $nbGdc), 2),
+                    );
+                }
+
+                $username = $entity->getIdUser()->getUsername();
+                $id_user = $entity->getIdUser()->getId();
+                $nbTotalStars = $entity->getFirstAttack() + $entity->getSecondAttack();
+                $firstAttackAverage = $entity->getFirstAttack();
+                $secondAttackAverage = $entity->getSecondAttack();
+                $nbGdc = 1;
+            } else {
+                $nbTotalStars += $entity->getFirstAttack() + $entity->getSecondAttack();
+                $firstAttackAverage += $entity->getFirstAttack();
+                $secondAttackAverage += $entity->getSecondAttack();
+                $nbGdc++;
+            }
+        }
+        echo json_encode(
+                array(
+                    'nb_users' => count($allUsers),
+                    'nb_gdc_users' => count($aStatsUsers),
+                    'users' => $aStatsUsers,
+                )
+        );
+        exit;
+    }
+
 }

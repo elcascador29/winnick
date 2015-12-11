@@ -1,0 +1,62 @@
+<div id="page">
+    <div class="jumbotron col-xs-12">
+        <h1>Winnick</h1>
+        <h3>Niveau 4 - {{stats_users.nb_gdc_users}} membres en GDC - {{stats_users.nb_users}} membres</h3>
+        <!-- <div class="progress">
+            <div class="progress-bar progress-bar-info" style="width: 100%">31 guerres</div>
+          </div>
+        <div class="progress">
+            <div class="progress-bar progress-bar-success" style="width: 75%">23 victoires (75%)</div>
+        </div>
+        <div class="progress">
+          <div class="progress-bar progress-bar-danger" style="width: 25%">8 défaites (25%)</div>
+        </div> -->
+        <div class="progress">
+            <div style="width: {{(stats.nb_gdc_win / stats.nb_gdc) * 100}}%" class="progress-bar progress-bar-success">{{stats.nb_gdc_win}} victoires ({{(stats.nb_gdc_win / stats.nb_gdc) * 100}}%)</div>
+            <div style="width: {{(stats.nb_gdc_loose / stats.nb_gdc) * 100}}%" class="progress-bar progress-bar-danger">{{stats.nb_gdc_loose}} défaites ({{(stats.nb_gdc_loose / stats.nb_gdc) * 100}}%)</div>
+        </div>
+    </div>
+
+    <div class="col-xs-6 col-sm-4" ng-repeat="(key2,user2) in stats_users.users" >
+        <div class ="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{user2.username}}</h3>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <span class="badge">{{user2.nbGdc}}</span>
+                        Nombre de GDC
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">2</span>
+                        <img src="img/star22.png"> {{user2.nbTotalStars}}
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">1</span>
+                        <img src="img/sword32.png">{{user2.firstAttackAverage}}
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">1</span>
+                        <img src="img/sword32.png">{{user2.secondAttackAverage}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!--    <ul ng-repeat="(key2,user2) in stats_users.users">
+            <li>
+                {{user2.username}}
+            </li>
+            <li>
+                {{user2.nbGdc}}
+            </li>
+            <li>
+                {{user2.firstAttackAverage}}
+            </li>
+            <li>
+                {{user2.secondAttackAverage}}
+            </li>
+        </ul>-->
+</div>

@@ -28,3 +28,9 @@ app_gdc_war_info:
 app_gdc_save_war:
     path:     /gdc/saveWar
     defaults: { _controller: AppBundle:Gdc:saveWar }
+app_gdc_stats:
+    path:     /gdc/stats
+    defaults: { _controller: AppBundle:Gdc:stats }
+app_gdc_stats_users:
+    path:     /gdc/statsUsers
+    defaults: { _controller: AppBundle:Gdc:statsUsers }

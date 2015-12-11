@@ -25,4 +25,19 @@ class WarAttackRepository extends EntityRepository
         return $q->getResult();
     }
 
+    public function getStatsUsers(){
+        $q = $this
+                ->createQueryBuilder('w')
+                ->leftJoin('App\AppBundle\Entity\Users',
+                        'u',
+                        'WITH',
+                        'u.id=w.idUser'
+                        )
+                ->where('u.state = 1')
+                ->orderBy('u.id')
+                ->getQuery()
+        ;
+
+        return $q->getResult();
+    }
 }

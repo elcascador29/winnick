@@ -24,7 +24,7 @@ class DefaultController extends Controller
             $orderBy = 'id';
         }
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         if ($in) {
             $users = $em->getRepository('AppBundle:Users')->getUsersIn();
         } else {
@@ -85,7 +85,7 @@ class DefaultController extends Controller
             $em = $this->getDoctrine()->getManager();
 
             // get user
-            if (isset($updateUser['id']) && $updateUser['id'] !== null) {
+            if ($updateUser['id'] !== null) {
                 $user = $this->getDoctrine()
                         ->getRepository('AppBundle:Users')
                         ->find($updateUser['id']);
@@ -130,8 +130,7 @@ class DefaultController extends Controller
             $em->persist($user);
 ////
             $em->flush();
-            
-            echo json_encode(array('id_user' => $user->getId()));
+//
         }
         exit;
     }
