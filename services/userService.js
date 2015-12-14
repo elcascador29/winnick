@@ -23,9 +23,9 @@ app
             }
 
             var factory = {
-                users_in: $resource('../api/web/users/getAll/In', {}),
-                users_out: $resource('../api/web/users/getAll/Out', {}),
-                save_user: $resource('../api/web/users/saveUser', {}),
+                users_in: $resource('../api/web/app_dev.php/users/getAll/In', {}),
+                users_out: $resource('../api/web/app_dev.php/users/getAll/Out', {}),
+                save_user: $resource('../api/web/app_dev.php/users/saveUser', {}),
                 getAllInUsers: function(field) {
                     return this.users_in.get({field: field});
                 },

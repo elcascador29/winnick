@@ -29,13 +29,13 @@ app
             }
 
             var factory = {
-                getAll: $resource('../api/web/gdc/getAll', {}),
-                save_gdc: $resource('../api/web/gdc/save', {}),
-                war: $resource('../api/web/gdc/war/:id', {id:'@id'}),
-                war_info: $resource('../api/web/gdc/warInfo/:id', {id:'@id'}),
-                war_save: $resource('../api/web//gdc/saveWar', {}),
-                gdc_stats: $resource('../api/web/gdc/stats', {}),
-                gdc_stats_users: $resource('../api/web/gdc/statsUsers', {}),
+                getAll: $resource('../api/web/app_dev.php/gdc/getAll', {}),
+                save_gdc: $resource('../api/web/app_dev.php/gdc/save', {}),
+                war: $resource('../api/web/app_dev.php/gdc/war/:id', {id:'@id'}),
+                war_info: $resource('../api/web/app_dev.php/gdc/warInfo/:id', {id:'@id'}),
+                war_save: $resource('../api/web/app_dev.php/gdc/saveWar', {}),
+                gdc_stats: $resource('../api/web/app_dev.php/gdc/stats', {}),
+                gdc_stats_users: $resource('../api/web/app_dev.php/gdc/statsUsers', {}),
                 getAllGdc: function() {
                     return this.getAll.get({});
                 },
