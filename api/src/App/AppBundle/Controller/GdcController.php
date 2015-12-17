@@ -89,7 +89,10 @@ class GdcController extends Controller
                 'first_attack' => $user->getFirstAttack(),
                 'second_attack' => $user->getSecondAttack(),
                 'strategy' => $user->getStrategy(),
+                'strategy2' => $user->getStrategy2(),
                 'cdc_full' => $user->getCdcFull(),
+                'enemy_position' => $user->getEnemyPosition(),
+                'enemy_position2' => $user->getEnemyPosition2(),
             ));
         }
         echo json_encode(
@@ -124,6 +127,10 @@ class GdcController extends Controller
         exit;
     }
 
+    /**
+     * Sauvegarde le détail d'une GDC
+     * @param Request $request
+     */
     public function saveWarAction(Request $request)
     {
         if ($request->getMethod() == 'POST') {
@@ -156,6 +163,9 @@ class GdcController extends Controller
             $war->setSecondAttack($updateWar['second_attack']);
             $war->setIdUser($user);
             $war->setStrategy($updateWar['strategy']);
+            $war->setStrategy2($updateWar['strategy2']);
+            $war->setEnemyPosition($updateWar['enemy_position']);
+            $war->setEnemyPosition2($updateWar['enemy_position2']);
 
             $em->persist($war);
 
