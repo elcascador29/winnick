@@ -17,7 +17,7 @@ app
                 this.second_attack = null;
                 this.strategy2 = null;
                 this.enemy_position2 = null;
-                this.cdc_full = null;
+//                this.cdc_full = null;
             }
             
             function DateGdc(){

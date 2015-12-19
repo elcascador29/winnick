@@ -70,7 +70,7 @@ class Gdc
     public function setEnemyTeam($enemyTeam)
     {
         $this->enemyTeam = $enemyTeam;
-
+    
         return $this;
     }
 
@@ -93,7 +93,7 @@ class Gdc
     public function setStars($stars)
     {
         $this->stars = $stars;
-
+    
         return $this;
     }
 
@@ -116,7 +116,7 @@ class Gdc
     public function setEnemyStars($enemyStars)
     {
         $this->enemyStars = $enemyStars;
-
+    
         return $this;
     }
 
@@ -139,7 +139,7 @@ class Gdc
     public function setDate($date)
     {
         $this->date = $date;
-
+    
         return $this;
     }
 

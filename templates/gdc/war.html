@@ -14,13 +14,13 @@
             <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'first_attack'}" class="glyphicon glyphicon-triangle-top"></span>
             <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'first_attack'}" class="glyphicon glyphicon-triangle-bottom"></span>
         </th>
-        <th ng-click="order('enemy_position')" class="col-xs-2">
+        <th ng-click="order('enemy_position')" class="col-xs-1">
             <input class="col-xs-12" type="text" ng-model="search.enemy_position"/>
             <span>n° enemy</span> 
             <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'enemy_position'}" class="glyphicon glyphicon-triangle-top"></span>
             <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'enemy_position'}" class="glyphicon glyphicon-triangle-bottom"></span>     
         </th>
-        <th ng-click="order('strategy')" class="col-xs-2">
+        <th ng-click="order('strategy')" class="col-xs-1">
             <input class="col-xs-12" type="text" ng-model="search.strategy"/>
             <span>strategy</span> 
             <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'strategy'}" class="glyphicon glyphicon-triangle-top"></span>
@@ -38,19 +38,12 @@
             <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'enemy_position2'}" class="glyphicon glyphicon-triangle-top"></span>
             <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'enemy_position2'}" class="glyphicon glyphicon-triangle-bottom"></span>
         </th>
-        <th ng-click="order('strategy2')" class="col-xs-2">
+        <th ng-click="order('strategy2')" class="col-xs-1">
             <input class="col-xs-12" type="text" ng-model="search.strategy2"/>
             <span>strategy</span> 
             <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'strategy2'}" class="glyphicon glyphicon-triangle-top"></span>
             <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'strategy2'}" class="glyphicon glyphicon-triangle-bottom"></span>
-        </th>
-        <th ng-click="order('cdc_full')" class="col-xs-1">
-            <input class="col-xs-12" type="text" ng-model="search.cdc_full"/>
-            <span>cdc full</span> 
-            <span aria-hidden="true" ng-class="{'grey':!reverse && predicate == 'cdc_full'}" class="glyphicon glyphicon-triangle-top"></span>
-            <span aria-hidden="true" ng-class="{'grey':reverse && predicate == 'cdc_full'}" class="glyphicon glyphicon-triangle-bottom"></span>
-        </th>
-        
+        </th>        
         <th></th>
     </tr>
     <tr ng-repeat="(key,user) in War.users | orderBy:predicate:reverse |filter:search">
@@ -60,7 +53,7 @@
             <!--</a>-->
         </td>
         <td>
-            {{user.first_attack}}
+            <img src="img/star22.png" ng-repeat="t in getTimes(user.first_attack) track by $index">
         </td>
         <td>
             {{user.enemy_position}}
@@ -69,16 +62,13 @@
             {{user.strategy}}
         </td>
         <td>
-            {{user.second_attack}}
+            <img src="img/star22.png" ng-repeat="t in getTimes(user.second_attack) track by $index">
         </td>
         <td>
             {{user.enemy_position2}}
         </td>
         <td>
             {{user.strategy2}}
-        </td>
-        <td>
-            {{user.cdc_full}}
         </td>
        
         <td class="glyphicon glyphicon-edit edit_gdc" data-toggle="modal" data-target="#myModal" ng-click="filled_war(user.id_user)"></td>
@@ -105,13 +95,13 @@
                             </select>
 
                         </div>
-                        <div class="form-group">
+<!--                        <div class="form-group">
                             <label for="cdc_full" class="col-xs-3">full cdc :</label>
                             <select name="cdc_full" class="col-xs-4" ng-model="edit_war_user.cdc_full">
                                 <option value="true" ng-selected="{{edit_war_user.cdc_full}}">full</option>
                                 <option value="false" ng-selected="{{edit_war_user.cdc_full}}">empty</option>
                             </select>
-                        </div>
+                        </div>-->
                         <fieldset>
                             <legend>First attack</legend>
                             <div class="form-group col-xs-6">

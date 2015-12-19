@@ -1,5 +1,5 @@
 app
-        .controller('gdcCtrl', ['$scope', 'UserService', 'GdcService', '$resource', '$location', '$state', '$stateParams'/*, 'Friends'*/, function($scope, UserService, GdcService, $resource, $location, $state, $stateParams) {
+        .controller('gdcCtrl', ['$scope', 'UserService', 'GdcService', '$resource', '$location', '$state', '$stateParams'/*, 'Friends'*/, function ($scope, UserService, GdcService, $resource, $location, $state, $stateParams) {
 
                 var currentState = $state.current.name;
                 console.log(currentState);
@@ -16,18 +16,18 @@ app
                     $scope.reverse = false;
                 }
 
-                
-                $scope.order = function(predicate) {
+
+                $scope.order = function (predicate) {
                     $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
                     $scope.predicate = predicate;
                 };
 
                 // fill the modal
-                $scope.filled_gdc = function(id_gdc) {
+                $scope.filled_gdc = function (id_gdc) {
                     $scope.id_gdc = id_gdc;
 
                     if (!angular.isUndefined($scope.Gdcs.listGdc)) {
-                        $scope.Gdcs.listGdc.some(function(tmpGdc) {
+                        $scope.Gdcs.listGdc.some(function (tmpGdc) {
                             if (tmpGdc.id == id_gdc) {
                                 return $scope.edit_gdc = tmpGdc;
                             }
@@ -37,11 +37,11 @@ app
                 }
 
                 // fill the war modal
-                $scope.filled_war = function(id_user) {
+                $scope.filled_war = function (id_user) {
                     $scope.id_user = id_user;
 
                     if (!angular.isUndefined($scope.War.users)) {
-                        $scope.War.users.some(function(tmpUser) {
+                        $scope.War.users.some(function (tmpUser) {
                             if (tmpUser.id_user == id_user) {
 //                                console.log(tmpUser);
                                 return $scope.edit_war_user = tmpUser;
@@ -52,7 +52,7 @@ app
                 }
 
                 // save form GDC
-                $scope.edit = function(gdc) {
+                $scope.edit = function (gdc) {
                     var ret = GdcService.saveGdc(gdc);
 
                     // Ajout à la liste si nouvel utilisateur
@@ -66,7 +66,7 @@ app
                 }
 
                 // save form détail GDC
-                $scope.edit_war = function(war) {
+                $scope.edit_war = function (war) {
                     var ret = GdcService.saveWarAttack(war, $stateParams.id);
 
                     // Ajout à la liste si nouvel utilisateur
@@ -81,18 +81,22 @@ app
                 }
 
                 // clear form
-                $scope.clear_gdc_form = function() {
+                $scope.clear_gdc_form = function () {
                     console.log('clear');
                     return $scope.edit_gdc = GdcService.getNew();
-                }
+                };
 
                 // clear war form
-                $scope.clear_war_form = function() {
+                $scope.clear_war_form = function () {
                     return $scope.edit_war_user = GdcService.getWarNew();
-                }
+                };
+
+                $scope.getTimes = function (n) {
+                    return new Array(n);
+                };
 
                 // convertit une date sql->html
-                $scope.convertDate = function(stringDate) {
+                $scope.convertDate = function (stringDate) {
                     if (!angular.isUndefined(stringDate)) {
 
                         var dateOut = new Date(stringDate.substr(0, 10));

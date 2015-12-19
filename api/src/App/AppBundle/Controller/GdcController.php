@@ -90,7 +90,7 @@ class GdcController extends Controller
                 'second_attack' => $user->getSecondAttack(),
                 'strategy' => $user->getStrategy(),
                 'strategy2' => $user->getStrategy2(),
-                'cdc_full' => $user->getCdcFull(),
+//                'cdc_full' => $user->getCdcFull(),
                 'enemy_position' => $user->getEnemyPosition(),
                 'enemy_position2' => $user->getEnemyPosition2(),
             ));
@@ -158,7 +158,7 @@ class GdcController extends Controller
                     ->find($params['id_gdc']);
 
             $war->setIdGdc($gdc);
-            $war->setCdcFull($updateWar['cdc_full']);
+//            $war->setCdcFull($updateWar['cdc_full']);
             $war->setFirstAttack($updateWar['first_attack']);
             $war->setSecondAttack($updateWar['second_attack']);
             $war->setIdUser($user);
